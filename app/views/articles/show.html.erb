@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @article.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @article.body %>
+</p>
+  <%= link_to 'Edit', edit_article_path(@article) %> |
+  <%= link_to 'Back', articles_path %>
+
+<h2>Comments</h2>
+  <% @article.comments.each do |comment| %>
+  <p>
+    <strong>Commenter:</strong>
+    <%= comment.commenter %>
+  </p>
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+  </p>
+    <% end %>
+
+<h2>Add a comment: </h2>
+<%= form_with model: [@article, @article.comments.build] do |form| %>
+
+  <p><%= form.label :commenter %></p>
+  <p><%= form.text_field :commenter %></p>
+
+  <p><%= form.label :body %></p>
+  <p><%= form.text_area :body %>
+
+  <p>
+    <%= form.submit %>
+  </p>
+  <% end %>
